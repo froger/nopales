@@ -1,6 +1,4 @@
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import OnboardForm from "./OnboardForm";
 
 export type OnboardPageProps = React.PropsWithChildren<{}>;
@@ -15,5 +13,4 @@ const OnboardPage = ({ children }: OnboardPageProps) => {
     return <OnboardForm user={session?.user} />;
   return <>{children}</>;
 };
-
 export default OnboardPage;

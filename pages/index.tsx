@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { GetServerSideProps } from "next";
+import { getToken } from "next-auth/jwt";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -14,14 +16,26 @@ export default function Home() {
       <nav></nav>
 
       <main className="prose">
-        {status === "authenticated" ? (
-          <h2>Welcome {JSON.stringify(session.user)}</h2>
-        ) : (
+        
           <Link href="/api/auth/signin">Login</Link>
-        )}
       </main>
 
       <footer></footer>
     </div>
   );
+}
+
+export const getServerSideProps: GetServerSideProps = async ({req}) => {
+  const token = await getToken({req});
+  if(!!token?.email){
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/dashboard`
+      },
+    };
+  }
+  return {
+    props: {}
+  }
 }
