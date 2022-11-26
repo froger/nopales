@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { SessionProvider as AuthProvider } from "next-auth/react";
+import OnboardPage from "components/OnboardPage/OnboardPage";
 
 export default function App({
   Component,
@@ -8,7 +9,9 @@ export default function App({
 }: AppProps) {
   return (
     <AuthProvider session={session}>
-      <Component {...pageProps} />
+      <OnboardPage>
+        <Component {...pageProps} />
+      </OnboardPage>
     </AuthProvider>
   );
 }
