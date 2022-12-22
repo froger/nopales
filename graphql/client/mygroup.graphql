@@ -1,0 +1,11 @@
+query myGroups {
+  groups {
+    name
+    id
+    contributors {
+      user {
+        name
+      }
+    }
+  }
+}

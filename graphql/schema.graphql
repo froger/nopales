@@ -1,0 +1,30 @@
+type Group {
+  id: ID
+  name: String
+  createdAt: String
+  contributors: [Contributor]
+}
+input GroupInput {
+  name: String!
+}
+type Contributor {
+  user: User
+  groupId: String
+  createdAt: String
+}
+
+type User {
+  id: ID
+  name: String
+}
+
+type Query {
+  groups: [Group]!
+  group(id: ID!): Group!
+}
+
+type Mutation {
+  createGroup(data: GroupInput!): Group!
+  updateGroup(id: ID!, data: GroupInput!): Group!
+  deleteGroup(id: ID!): Group!
+}

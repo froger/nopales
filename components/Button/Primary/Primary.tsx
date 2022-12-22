@@ -2,16 +2,19 @@ import Link, { LinkProps } from "next/link";
 import React from "react";
 import BaseLink, { BaseLinkProps } from "../BaseLink";
 export type PrimaryButtonProps = React.PropsWithChildren<
-  BaseLinkProps & { className?: string }
+  Omit<BaseLinkProps, "children"> & { className?: string }
 >;
 const PrimaryButton = ({
   className = "",
   children,
+  onClick,
   ...props
 }: PrimaryButtonProps) => {
   return (
     <BaseLink {...props}>
-      <a className={`${className} p-3 bg-sky-100`}>{children}</a>
+      <a className={className} onClick={onClick}>
+        {children}
+      </a>
     </BaseLink>
   );
 };

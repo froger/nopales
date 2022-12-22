@@ -5,7 +5,6 @@ import { GetServerSideProps } from "next";
 import { getToken } from "next-auth/jwt";
 
 export default function Home() {
-  const { data: session, status } = useSession();
   return (
     <div>
       <Head>
@@ -16,8 +15,7 @@ export default function Home() {
       <nav></nav>
 
       <main className="prose">
-        
-          <Link href="/api/auth/signin">Login</Link>
+        <Link href="/api/auth/signin">Login</Link>
       </main>
 
       <footer></footer>
@@ -25,17 +23,17 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({req}) => {
-  const token = await getToken({req});
-  if(!!token?.email){
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const token = await getToken({ req });
+  if (!!token?.email) {
     return {
       redirect: {
         permanent: false,
-        destination: `/dashboard`
+        destination: `/dashboard`,
       },
     };
   }
   return {
-    props: {}
-  }
-}
+    props: {},
+  };
+};
